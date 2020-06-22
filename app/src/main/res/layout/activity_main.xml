@@ -1,12 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.hje.jan.hencoderplus.customview.ImageText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <com.hje.jan.hencoderplus.customview.TabLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Hencoder Plus"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Kotlin"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Android"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="第一行代码"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Google"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="协程"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="JetPack"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Java"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Http"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="多线程"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="四大组件"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="自定义View"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="绘制"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="布局"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="触摸反馈"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Hencoder Plus"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Kotlin"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Android"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="第一行代码"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Google"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="协程"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="JetPack"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Java"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="Http"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="多线程"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="四大组件"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="自定义View"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="绘制"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="布局"
+            android:textColor="#fff" />
+
+        <com.hje.jan.hencoderplus.customview.ColorTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="2dp"
+            android:text="触摸反馈"
+            android:textColor="#fff" />
+    </com.hje.jan.hencoderplus.customview.TabLayout>
+
+</ScrollView>

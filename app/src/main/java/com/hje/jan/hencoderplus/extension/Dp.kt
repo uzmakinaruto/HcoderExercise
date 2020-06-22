@@ -11,3 +11,5 @@ fun Int.dp(): Float {
     return Resources.getSystem().displayMetrics.density * this
 }
 
+fun getDensity() = Resources.getSystem().displayMetrics.density
+
