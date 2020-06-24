@@ -1,11 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.hje.jan.hencoderplus.customview.TabLayout
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F00">
+
+        <com.hje.jan.hencoderplus.customview.MaterialEditText
+            android:id="@+id/materialEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            app:isUseFloatingText="true"
+            app:maxCharCount="12"
+            app:minCharCount="6" />
+    </FrameLayout>
+
+    <!--<com.hje.jan.hencoderplus.customview.TabLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -218,6 +235,6 @@
             android:layout_margin="2dp"
             android:text="触摸反馈"
             android:textColor="#fff" />
-    </com.hje.jan.hencoderplus.customview.TabLayout>
+    </com.hje.jan.hencoderplus.customview.TabLayout>-->
 
-</ScrollView>
+</LinearLayout>
