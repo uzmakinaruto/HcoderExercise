@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <FrameLayout
+    <com.hje.jan.hencoderplus.customview.ScalableImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--<FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#F00">
@@ -20,7 +22,7 @@
             app:isUseFloatingText="true"
             app:maxCharCount="12"
             app:minCharCount="6" />
-    </FrameLayout>
+    </FrameLayout>-->
 
     <!--<com.hje.jan.hencoderplus.customview.TabLayout
         android:layout_width="wrap_content"
