@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import android.widget.OverScroller
 import androidx.core.view.GestureDetectorCompat
 import com.hje.jan.hencoderplus.R
 import com.hje.jan.hencoderplus.extension.dp
@@ -17,7 +18,7 @@ import com.hje.jan.hencoderplus.extension.getBitmap
 import kotlin.math.max
 import kotlin.math.min
 
-class ScalableImageView : View {
+class ScalableImageView : View, Runnable {
     companion object {
         const val TAG = "ScalableImageView"
         const val OVER_SCALE = 2f
@@ -33,9 +34,10 @@ class ScalableImageView : View {
     private var gestureDetector: GestureDetectorCompat
     private var originOffsetX = 0f
     private var originOffsetY = 0f
-
+    private lateinit var scroller: OverScroller
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         bitmap = getBitmap(context!!, R.drawable.chihuo, 300.dp())
+        scroller = OverScroller(context, null)
         gestureDetector =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDown(e: MotionEvent?): Boolean {
@@ -66,7 +68,9 @@ class ScalableImageView : View {
                 }
 
                 override fun onDoubleTap(e: MotionEvent?): Boolean {
-                    getScaleAnimator()?.start()
+                    if(scroller.isFinished){
+                        getScaleAnimator()?.start()
+                    }
                     Log.d(
                         TAG,
                         "onDoubleTap x:${e?.x} y:${e?.y} fitWidthScale${fitWidthScale} fitHeightScale${fitHeightScale}"
@@ -94,10 +98,25 @@ class ScalableImageView : View {
                     velocityY: Float
                 ): Boolean {
                     Log.d(TAG, "onFling")
+                    if(currentScale == fitHeightScale){
+                        scroller.fling(
+                            offsetX.toInt(),
+                            offsetY.toInt(),
+                            velocityX.toInt(),
+                            velocityY.toInt(),
+                            (-(bitmap.width * fitHeightScale - width) / 2).toInt(),
+                            ((bitmap.width * fitHeightScale - width) / 2).toInt(),
+                            (-(bitmap.height * fitHeightScale - height) / 2).toInt(),
+                            ((bitmap.height * fitHeightScale - height) / 2).toInt()
+                            , 100.dp().toInt(), 100.dp().toInt()
+                        )
+                        postOnAnimation(this@ScalableImageView)
+                    }
                     return super.onFling(e1, e2, velocityX, velocityY)
                 }
             })
     }
+
 
     fun getScaleAnimator(): ObjectAnimator? {
         when (currentScale) {
@@ -147,5 +166,14 @@ class ScalableImageView : View {
     fun setCurrentScale(currentScale: Float) {
         this.currentScale = currentScale
         invalidate()
+    }
+
+    override fun run() {
+        if (scroller.computeScrollOffset()) {
+            offsetX = scroller.currX.toFloat()
+            offsetY = scroller.currY.toFloat()
+            invalidate()
+            postOnAnimation(this)
+        }
     }
 }
