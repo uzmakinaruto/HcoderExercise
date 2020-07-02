@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.hje.jan.hencoderplus.customview.ScalableImageView
+    <com.hje.jan.hencoderplus.customview.MultiTouchView3
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <!--<FrameLayout

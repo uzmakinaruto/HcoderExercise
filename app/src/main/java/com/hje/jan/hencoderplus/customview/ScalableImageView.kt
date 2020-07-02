@@ -9,6 +9,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.OverScroller
 import androidx.core.view.GestureDetectorCompat
@@ -32,12 +33,39 @@ class ScalableImageView : View, Runnable {
     private var fitHeightScale = 0f
     private var currentScale = 1f
     private var gestureDetector: GestureDetectorCompat
+    private var scaleGestureDetector: ScaleGestureDetector
     private var originOffsetX = 0f
     private var originOffsetY = 0f
-    private lateinit var scroller: OverScroller
+    private var scroller: OverScroller
+    private var downX = 0f
+    private var downY = 0f
+
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
         bitmap = getBitmap(context!!, R.drawable.chihuo, 300.dp())
         scroller = OverScroller(context, null)
+        scaleGestureDetector =
+            ScaleGestureDetector(context, object : ScaleGestureDetector.OnScaleGestureListener {
+                var beginScale = 1f
+                override fun onScaleBegin(detector: ScaleGestureDetector?): Boolean {
+                    beginScale = currentScale
+                    return true
+                }
+
+                override fun onScaleEnd(detector: ScaleGestureDetector?) {
+                    offsetX = 0f
+                    offsetY = 0f
+                    invalidate()
+                }
+
+                override fun onScale(detector: ScaleGestureDetector?): Boolean {
+                    currentScale = beginScale * (detector?.scaleFactor ?: 1f)
+                    if (currentScale > fitHeightScale) currentScale = fitHeightScale
+                    else if (currentScale < 1f) currentScale = 1f
+                    invalidate()
+                    return false
+                }
+
+            })
         gestureDetector =
             GestureDetectorCompat(context, object : GestureDetector.SimpleOnGestureListener() {
                 override fun onDown(e: MotionEvent?): Boolean {
@@ -81,10 +109,8 @@ class ScalableImageView : View, Runnable {
                             if (it.y > (height - bitmap.height * fitWidthScale) / 2
                                 && it.y < (height + bitmap.height * fitWidthScale) / 2
                             ) {
-                                offsetX =
-                                    (it.x - width / 2) - (it.x - width / 2) * fitHeightScale / fitWidthScale
-                                offsetY =
-                                    (it.y - height / 2) - (it.y - height / 2) * fitHeightScale / fitWidthScale
+                                downX = it.x
+                                downY = it.y
                             }
                         }
                     }
@@ -119,30 +145,37 @@ class ScalableImageView : View, Runnable {
 
 
     fun getScaleAnimator(): ObjectAnimator? {
-        when (currentScale) {
-            1f -> return ObjectAnimator.ofFloat(this, "currentScale", 1f, fitWidthScale)
-            fitWidthScale -> return ObjectAnimator.ofFloat(
+        if (currentScale >= 1 && currentScale < fitWidthScale) {
+            return ObjectAnimator.ofFloat(
                 this,
                 "currentScale",
-                fitWidthScale,
+                currentScale,
+                fitWidthScale
+            )
+        } else if (currentScale >= fitWidthScale && currentScale < fitHeightScale) {
+            return ObjectAnimator.ofFloat(
+                this,
+                "currentScale",
+                currentScale,
                 fitHeightScale
             )
-            fitHeightScale -> {
-                offsetX = 0f
-                offsetY = 0f
-                return ObjectAnimator.ofFloat(
-                    this,
-                    "currentScale",
-                    fitHeightScale,
-                    1f
-                )
-            }
-
-            else -> return null
+        } else {
+            offsetX = 0f
+            offsetY = 0f
+            return ObjectAnimator.ofFloat(
+                this,
+                "currentScale",
+                fitHeightScale,
+                1f
+            )
         }
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
+        val result = scaleGestureDetector.onTouchEvent(event)
+        if (scaleGestureDetector.isInProgress) {
+            return result
+        }
         return gestureDetector.onTouchEvent(event)
     }
 
@@ -156,15 +189,20 @@ class ScalableImageView : View, Runnable {
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        canvas?.save()
         canvas?.translate(offsetX, offsetY)
         canvas?.scale(currentScale, currentScale, (width / 2).toFloat(), (height / 2).toFloat())
         canvas?.drawBitmap(bitmap, originOffsetX, originOffsetY, paint)
-        canvas?.restore()
     }
 
     fun setCurrentScale(currentScale: Float) {
         this.currentScale = currentScale
+        if (currentScale >= fitWidthScale && currentScale < fitHeightScale) {
+            offsetX =
+                (downX - width / 2) - (downX - width / 2) * currentScale / fitWidthScale
+            offsetY =
+                (downY - height / 2) - (downY - height / 2) * currentScale / fitWidthScale
+
+        }
         invalidate()
     }
 
